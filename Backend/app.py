@@ -5,15 +5,18 @@ import time
 from .util import spotifyToYT, YTtoSpotify, profileDetails
 import os
 from dotenv import load_dotenv
+# from flask_session import Session
 load_dotenv()
 
 
 # App config
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, supports_credentials=True)
+# Session(app)
 
-app.secret_key = 'SOMETHING-RANDOM'
+app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
+
 
 @app.route('/login',methods=['GET'])
 @cross_origin()
@@ -32,6 +35,7 @@ def authorize():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
+    session.modified = True
     # return "success"
     return redirect("http://localhost:3000/Homepage")
 
@@ -42,7 +46,7 @@ def logout():
     return redirect('https://accounts.spotify.com/en/logout')
 
 @app.route('/convertSpotify')
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def convertSpotify():
     session['token_info'], authorized = get_token()
     session.modified = True
@@ -58,7 +62,7 @@ def convertSpotify():
     return jsonify(data)
 
 @app.route('/convertYoutube')
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def convertYoutube():
     session['token_info'], authorized = get_token()
     session.modified = True
@@ -74,7 +78,7 @@ def convertYoutube():
     return jsonify(data)
 
 @app.route('/home')
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def home():
     session['token_info'], authorized = get_token()
     session.modified = True
@@ -86,10 +90,10 @@ def home():
     return jsonify(data)
 
 # Checks to see if token is valid and gets a new token if not
+# @cross_origin(supports_credentials=True)
 def get_token():
     token_valid = False
     token_info = session.get("token_info", {})
-
     # Checking if the session already has a token stored
     if not (session.get('token_info', False)):
         token_valid = False

@@ -18,7 +18,7 @@ class Homepage extends Component {
     getData() {
         var self = this;
         axios
-        .get('http://localhost:5000/home')
+        .get('http://localhost:5000/home',{withCredentials: true})
         .then(function (response) {
         console.log(response.data);
         self.setState({name: response.data})
