@@ -27,8 +27,6 @@ class YoutubeToSpotify extends Component {
         return (
           <body className="App-body">
             <div className="YoutubeToSpotify">
-              
-
                 <Container>
                     <Row>
                       <Col>
