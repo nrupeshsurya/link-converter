@@ -1,5 +1,8 @@
 import youtube_dl
 from spotipy import Spotify
+from ytmusicapi import YTMusic
+
+ytmusic = YTMusic()
 
 def spotifyToYT(link, access_token):
     link = link[34:45]
@@ -27,3 +30,29 @@ def spotifyToYT(link, access_token):
         return new_url
     except:
         return 'error'
+
+def YTtoSpotify(link, access_token):
+    song_id=''   
+    l = len(link)
+    for i in range(l):
+        if link[l-i-1]=='/':
+            break
+        song_id+=link[l-i-1]
+    song_id = song_id[::-1]
+
+    sp = Spotify(auth=access_token)
+    data = sp.track(song_id)
+
+    songName = data['name']
+    artistName = data['artists'][0]['name']
+
+    search = ytmusic.search(query=songName+' '+artistName,filter='songs')
+    backupSearch = ytmusic.search(query=songName+' '+artistName)
+
+    url='https://music.youtube.com/watch?v='
+    try:
+        url+=search[0]['videoId']
+    except:
+        url+=backupSearch[1]['videoId']
+        
+    return url

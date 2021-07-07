@@ -2,7 +2,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, url_for, session, request, redirect
 import time
 import json
-from util import spotifyToYT
+from util import spotifyToYT, YTtoSpotify
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -28,13 +28,13 @@ def authorize():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
-    return redirect("/convertSpotify")
+    return redirect("/convertYoutube")
 
 @app.route('/logout')
 def logout():
     for key in list(session.keys()):
         session.pop(key)
-    return redirect('/')
+    return redirect('https://accounts.spotify.com/en/logout')
 
 @app.route('/convertSpotify')
 def convertSpotify():
@@ -45,6 +45,20 @@ def convertSpotify():
     # link = request.form['link']
     link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
     linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
+    data = {
+        'link': linkToReturn
+    }
+    return json.dumps(data)
+
+@app.route('/convertYoutube')
+def convertYoutube():
+    session['token_info'], authorized = get_token()
+    session.modified = True
+    if not authorized:
+        return redirect('/')
+    # link = request.form['link']
+    link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
+    linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
     data = {
         'link': linkToReturn
     }
