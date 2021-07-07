@@ -45,6 +45,12 @@
   padding: 0.7em 1.5em;
   text-transform: uppercase;
   transition: all 0.25s ease;
+  animation: fadein 3s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .App-link:hover {
@@ -90,6 +96,23 @@
 
 .ConvertY2S-link:hover {
   background: #FF0000;
+  color: #333;
+}
+
+.ConvertS2Y-link {
+  color: #1DB954;
+  border: 0.2em solid #1DB954;
+  border-radius: 2em;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 3vmin;
+  padding: 0.7em 1.5em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+}
+
+.ConvertS2Y-link:hover {
+  background: #1DB954;
   color: #333;
 }
 

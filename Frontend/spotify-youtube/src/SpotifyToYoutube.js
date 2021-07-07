@@ -53,7 +53,7 @@ class SpotifyToYoutube extends Component {
                     </Row>
                     <Row>
                       <Col>
-                        <Button onClick={this.handleConvert} className="App-link" block >
+                        <Button onClick={this.handleConvert} className="ConvertS2Y-link" block >
                           Convert
                         </Button>
                       </Col>

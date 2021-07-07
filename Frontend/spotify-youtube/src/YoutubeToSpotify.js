@@ -47,7 +47,7 @@ class YoutubeToSpotify extends Component {
                           <div class="pull-left">
                               <img src={logo} alt="logo" style={{ height: 79.5, width: 54 }}/>
                             </div>
-                          <Input type="text" onChange={this.spotifyLink} placeholder="Enter Spotify Link" className="enter-text"/>
+                          <Input type="text" onChange={this.spotifyLink} placeholder="Spotify Link" className="enter-text"/>
                         </InputGroup>
                       </Col>
                     </Row>
