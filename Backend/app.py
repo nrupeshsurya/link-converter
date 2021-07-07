@@ -1,6 +1,6 @@
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, url_for, session, request, redirect, jsonify
-from flask_cors import cross_origin
+from flask_cors import cross_origin, CORS
 import time
 from .util import spotifyToYT, YTtoSpotify, profileDetails
 import os
@@ -10,6 +10,7 @@ load_dotenv()
 
 # App config
 app = Flask(__name__)
+cors = CORS(app)
 
 app.secret_key = 'SOMETHING-RANDOM'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
