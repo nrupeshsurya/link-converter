@@ -13,6 +13,21 @@ pip install -r requirements.txt
 
 ## Usage
 
+Create a file to store the client id and client secret
+
+```bash
+touch .env
+```
+
+Modify the .env file
+
+```bash
+client_id = <client-id>
+client_secret = <client-secret>
+```
+
+Modify the env file
+
 ```bash
 flask run
 ```
