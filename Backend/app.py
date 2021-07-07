@@ -2,7 +2,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, url_for, session, request, redirect
 import time
 import json
-from util import spotifyToYT, YTtoSpotify, profileDetails
+from .util import spotifyToYT, YTtoSpotify, profileDetails
 import os
 from dotenv import load_dotenv
 load_dotenv()
