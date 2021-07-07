@@ -1,5 +1,5 @@
 from spotipy.oauth2 import SpotifyOAuth
-from flask import Flask, url_for, session, request, redirect
+from flask import Flask, url_for, session, request, redirect, jsonify
 import time
 import json
 from .util import spotifyToYT, YTtoSpotify, profileDetails
@@ -19,7 +19,7 @@ def login():
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     print(auth_url)
-    return json.dumps({'link':auth_url})
+    return jsonify({'link':auth_url})
     # return redirect(auth_url)
 
 @app.route('/authorize')
@@ -29,7 +29,8 @@ def authorize():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
-    return redirect("/home")
+    return "success"
+    # return redirect("/home")
 
 @app.route('/logout')
 def logout():
@@ -50,7 +51,7 @@ def convertSpotify():
     data = {
         'link': linkToReturn
     }
-    return json.dumps(data)
+    return jsonify(data)
 
 @app.route('/convertYoutube')
 def convertYoutube():
@@ -65,7 +66,7 @@ def convertYoutube():
     data = {
         'link': linkToReturn
     }
-    return json.dumps(data)
+    return jsonify(data)
 
 @app.route('/home')
 def home():
@@ -76,7 +77,7 @@ def home():
         return redirect('/login')
     # link = request.form['link']
     data = profileDetails(session.get('token_info').get('access_token'))
-    return json.dumps(data)
+    return jsonify(data)
 
 # Checks to see if token is valid and gets a new token if not
 def get_token():
