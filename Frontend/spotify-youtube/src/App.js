@@ -20,7 +20,7 @@ class Login extends Component {
     .get('http://localhost:5000/login')
     .then(function (response) {
       console.log(response.data);
-      self.setState({link: response.data}, function() {console.log(self.state.link);})
+      self.setState({link: response.data})
     })
     .catch(function (error) {
       console.log(error);
