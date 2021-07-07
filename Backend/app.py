@@ -32,8 +32,8 @@ def authorize():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
-    return "success"
-    # return redirect("/home")
+    # return "success"
+    return redirect("http://localhost:3000")
 
 @app.route('/logout')
 def logout():
@@ -48,7 +48,7 @@ def convertSpotify():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('/login')
+        return redirect('http://localhost:3000/login')
     # link = request.form['link']
     link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
     linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
@@ -64,7 +64,7 @@ def convertYoutube():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('/login')
+        return redirect('http://localhost:3000/login')
     # link = request.form['link']
     link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
     linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
@@ -80,7 +80,7 @@ def home():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('/login')
+        return redirect('http://localhost:3000/login')
     # link = request.form['link']
     data = profileDetails(session.get('token_info').get('access_token'))
     return jsonify(data)
