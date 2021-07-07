@@ -11,6 +11,9 @@ class Homepage extends Component {
         this.state=({
           name: ''
         })
+    }
+
+    componentDidMount() {
         this.getData = this.getData.bind(this);
         this.getData();
     }
@@ -20,8 +23,8 @@ class Homepage extends Component {
         axios
         .get('http://localhost:5000/home',{withCredentials: true})
         .then(function (response) {
-        console.log(response.data);
-        self.setState({name: response.data})
+        console.log(response.data.display_name);
+        self.setState({name: response.data.display_name})
         })
         .catch(function (error) {
         console.log(error);
