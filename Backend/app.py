@@ -14,12 +14,13 @@ app = Flask(__name__)
 app.secret_key = 'SOMETHING-RANDOM'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
 
-@app.route('/')
+@app.route('/login')
 def login():
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     print(auth_url)
-    return redirect(auth_url)
+    return json.dumps({'link':auth_url})
+    # return redirect(auth_url)
 
 @app.route('/authorize')
 def authorize():
@@ -91,4 +92,4 @@ def create_spotify_oauth():
             client_id=os.getenv('client_id'),
             client_secret=os.getenv('client_secret'),
             redirect_uri=url_for('authorize', _external=True),
-            scope="")
+            scope=["user-read-private", "user-read-email"])
