@@ -64,7 +64,6 @@
 .YoutubeToSpotify {
   text-align: left;
   background-color: #282c34;
-  height: 100vh;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -104,4 +103,32 @@
   border-color: #000000;
   color: white;
   text-align:center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #17191d;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1DB954;
+}
+
+.navbar li>.active {
+  background-color: #1DB954;
 }

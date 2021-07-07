@@ -1,27 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from "react";
+import { Button } from 'reactstrap';
 
-class App extends Component {
+const axios = require('axios');
+
+class Login extends Component {
+  constructor() {
+    super();
+    this.state=({
+      link: {}
+    })
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin() {
+    var self = this;
+    axios.get('http://localhost:5000/login')
+    .then(function (response) {
+      console.log(response.data);
+      self.setState({link: response.data}, function() {
+        console.log(self.link);
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
+  
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} alt="logo" style={{ height: 424, width: 288 }}/>
         </header>
-        <body className="App-body">
-            <a
-                className="App-link"
-                href='http://127.0.0.1:5000/login'
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Login to Spotify
-            </a> 
-        </body>
+        <div className="App-body">
+            <Button onClick={this.handleLogin} className="App-link" block rel="noopener noreferrer" target="_blank">
+              Login to Spotify
+            </Button> 
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default Login;
