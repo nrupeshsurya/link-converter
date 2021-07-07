@@ -19,8 +19,9 @@ class Login extends Component {
     axios
     .get('http://localhost:5000/login')
     .then(function (response) {
-      console.log(response.data);
-      self.setState({link: response.data})
+      console.log(response.data.link);
+      self.setState({link: response.data.link})
+      window.open(self.state.link, "_self")
     })
     .catch(function (error) {
       console.log(error);

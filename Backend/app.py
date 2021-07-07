@@ -33,7 +33,7 @@ def authorize():
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
     # return "success"
-    return redirect("http://localhost:3000")
+    return redirect("http://localhost:3000/Homepage")
 
 @app.route('/logout')
 def logout():

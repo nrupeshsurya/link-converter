@@ -126,9 +126,17 @@ li a {
 }
 
 li a:hover {
-  background-color: #1DB954;
+  background-color: #eeeeee;
+  color: #282c34;
 }
 
 .navbar li>.active {
   background-color: #1DB954;
 }
+
+.enter-text {
+  outline: none;
+  font-size: 20px;
+}
+
+

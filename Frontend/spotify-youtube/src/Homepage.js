@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';  
 import YoutubeToSpotify from './YoutubeToSpotify'
 import SpotifyToYoutube from './SpotifyToYoutube';  
-import Login from './Login'
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';  
 
 function Homepage() {  
@@ -17,17 +16,13 @@ function Homepage() {
               </li>    
               <li className="nav-item">    
                 <NavLink to={'/SpotifyToYouTube'} activeClassName="active">Spotify To YouTube</NavLink>    
-              </li>
-              <li className="nav-item">
-                  <NavLink to={'/Login'} activeClassName="active">Log Out</NavLink>
-              </li>    
+              </li>   
             </ul>    
           </div>    
         </nav> <br />    
         <Switch>    
           <Route path='/YoutubeToSpotify' component={YoutubeToSpotify} />    
           <Route path='/SpotifyToYoutube' component={SpotifyToYoutube} />  
-          <Route path='/Login' component={Login}/>  
         </Switch>  
       </div>    
     </Router>   
