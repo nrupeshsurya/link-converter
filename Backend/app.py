@@ -3,6 +3,9 @@ from flask import Flask, url_for, session, request, redirect
 import time
 import json
 from util import spotifyToYT
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # App config
@@ -71,7 +74,7 @@ def get_token():
 
 def create_spotify_oauth():
     return SpotifyOAuth(
-            client_id="cf4dac6c6f5648e484d5dc1745c3a6bf",
-            client_secret="c2d77f3602f945ed9582bc51340838a3",
+            client_id=os.getenv('client_id'),
+            client_secret=os.getenv('client_secret'),
             redirect_uri=url_for('authorize', _external=True),
             scope="")

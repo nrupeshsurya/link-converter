@@ -10,14 +10,14 @@ def spotifyToYT(link, access_token):
         )
     try:
         artist = video['artist']
-        songNamee = video['track']
-        searchquery = 'track:'+songNamee+' '+'artist:'+artist
+        songName = video['track']
+        searchquery = 'track:'+songName+' '+'artist:'+artist
     except:
         artist = ''
-        songNamee = ''
+        songName = ''
         searchquery = video['title']
 
-    if songNamee==None:
+    if songName==None:
         searchquery = video['title']
 
     data = sp.search(q=searchquery)
