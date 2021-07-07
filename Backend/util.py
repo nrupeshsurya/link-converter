@@ -54,5 +54,11 @@ def YTtoSpotify(link, access_token):
         url+=search[0]['videoId']
     except:
         url+=backupSearch[1]['videoId']
-        
+
     return url
+
+def profileDetails(access_token):
+    sp = Spotify(auth=access_token)
+    data = sp.me()
+    return data
+    pass
