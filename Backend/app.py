@@ -25,6 +25,7 @@ def login():
     # return redirect(auth_url)
 
 @app.route('/authorize')
+@cross_origin()
 def authorize():
     sp_oauth = create_spotify_oauth()
     session.clear()
@@ -41,6 +42,7 @@ def logout():
     return redirect('https://accounts.spotify.com/en/logout')
 
 @app.route('/convertSpotify')
+@cross_origin()
 def convertSpotify():
     session['token_info'], authorized = get_token()
     session.modified = True
@@ -56,6 +58,7 @@ def convertSpotify():
     return jsonify(data)
 
 @app.route('/convertYoutube')
+@cross_origin()
 def convertYoutube():
     session['token_info'], authorized = get_token()
     session.modified = True
@@ -71,6 +74,7 @@ def convertYoutube():
     return jsonify(data)
 
 @app.route('/home')
+@cross_origin()
 def home():
     session['token_info'], authorized = get_token()
     session.modified = True
