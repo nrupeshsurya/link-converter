@@ -1,5 +1,6 @@
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, url_for, session, request, redirect, jsonify
+from flask_cors import cross_origin
 import time
 from .util import spotifyToYT, YTtoSpotify, profileDetails
 import os
@@ -14,6 +15,7 @@ app.secret_key = 'SOMETHING-RANDOM'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
 
 @app.route('/login',methods=['GET'])
+@cross_origin()
 def login():
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
