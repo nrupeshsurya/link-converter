@@ -12,7 +12,7 @@ class App extends Component {
         <body className="App-body">
             <a
                 className="App-link"
-                href='http://127.0.0.1:5000/'
+                href='http://127.0.0.1:5000/login'
                 target="_blank"
                 rel="noopener noreferrer"
             >
