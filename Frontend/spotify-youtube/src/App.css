@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  height: 100vh;
 }
 
 .App-logo {
@@ -15,13 +17,22 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
+  height: 70vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-body {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
 }
 
 .App-link {
@@ -48,4 +59,49 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.YoutubeToSpotify {
+  text-align: left;
+  background-color: #282c34;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.ConvertY2S-link {
+  color: #FF0000;
+  border: 0.2em solid #FF0000;
+  border-radius: 2em;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 3vmin;
+  padding: 0.7em 1.5em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  align-self: center;
+}
+
+.ConvertY2S-link:hover {
+  background: #FF0000;
+  color: #333;
+}
+
+.enter-text {
+  width: 700px;
+  height: 50px;
+  border-width: 0px;
+  margin-bottom:100px;
+  border-radius: 25px;
+  background-color: #000000;
+  border-color: #000000;
+  color: white;
+  text-align:center;
 }
