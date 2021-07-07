@@ -26,7 +26,7 @@ client_id = <client-id>
 client_secret = <client-secret>
 ```
 
-Modify the env file
+Run the flask app 
 
 ```bash
 flask run
