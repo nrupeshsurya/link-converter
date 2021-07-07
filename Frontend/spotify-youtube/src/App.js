@@ -16,12 +16,11 @@ class Login extends Component {
 
   handleLogin() {
     var self = this;
-    axios.get('http://localhost:5000/login')
+    axios
+    .get('http://localhost:5000/login')
     .then(function (response) {
       console.log(response.data);
-      self.setState({link: response.data}, function() {
-        console.log(self.link);
-      });
+      self.setState({link: response.data}, function() {console.log(self.state.link);})
     })
     .catch(function (error) {
       console.log(error);
