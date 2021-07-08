@@ -11,8 +11,6 @@ def YTtoSpotify(link, access_token):
         link = re.search('v=(.{11})', link).group(1)
     except:
         link = re.search('v=(.*)',link).group(1)
-    print(link)
-    print("\n\n\n\n")
     sp = Spotify(auth=access_token)
     youtube_url = f"https://www.youtube.com/watch?v={link}"
     video = youtube_dl.YoutubeDL({'quiet': True}).extract_info(
@@ -40,12 +38,6 @@ def YTtoSpotify(link, access_token):
 
 def spotifyToYT(link, access_token):
     song_id=''   
-    # l = len(link)
-    # for i in range(l):
-    #     if link[l-i-1]=='/':
-    #         break
-    #     song_id+=link[l-i-1]
-    # song_id = song_id[::-1]
 
     try:
         song_id = re.search('track/(.{22})', link).group(1)
