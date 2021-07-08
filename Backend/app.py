@@ -45,7 +45,7 @@ def logout():
         session.pop(key)
     return redirect('https://accounts.spotify.com/en/logout')
 
-@app.route('/convertSpotify')
+@app.route('/convertSpotify',methods=['POST'])
 @cross_origin(supports_credentials=True)
 def convertSpotify():
     session['token_info'], authorized = get_token()
@@ -61,7 +61,7 @@ def convertSpotify():
     }
     return jsonify(data)
 
-@app.route('/convertYoutube')
+@app.route('/convertYoutube',methods=['POST'])
 @cross_origin(supports_credentials=True)
 def convertYoutube():
     session['token_info'], authorized = get_token()
