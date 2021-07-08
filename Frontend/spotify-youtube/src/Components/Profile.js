@@ -1,12 +1,14 @@
 import '../App.css';
 import React, { Component } from "react";
+import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 
 const axios = require('axios');
 class Profile extends Component {
     constructor() {
         super();
         this.state=({
-          name: ''
+          name: '',
+          image: ''
         })
     }
 
@@ -21,7 +23,7 @@ class Profile extends Component {
         .get('http://localhost:5000/home',{withCredentials: true})
         .then(function (response) {
         // console.log(response.data.display_name);
-        self.setState({name: response.data.display_name})
+        self.setState({name: response.data.display_name, image: response.data.images[0]['url']})
         })
         .catch(function (error) {
         console.log(error);
@@ -29,11 +31,20 @@ class Profile extends Component {
     }
 
     render() {
-        const {name} = this.state
+        const {name, image} = this.state;
+        
         return (   
+            // <div>
+            //     <p>Hi {name} is a test message!</p>
+            // </div>
             <div>
-                <p>Hi {name} is a test message!</p>
-            </div>  
+                <Card>
+                    <CardImg top width="40%" src={image} alt="Card image cap" />
+                    <CardBody>
+                        <CardTitle tag="h6">{name}</CardTitle>
+                    </CardBody>
+                </Card>
+            </div>
         );
     }
 }

@@ -52,7 +52,7 @@ def convertSpotify():
         return redirect('http://localhost:3000')
     link = request.form['link']
     # link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
-    linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
+    linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
     data = {
         'link': linkToReturn
     }
@@ -68,7 +68,7 @@ def convertYoutube():
     link = request.form['link']
     print(link)
     #link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
-    linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
+    linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
     data = {
         'link': linkToReturn
     }
