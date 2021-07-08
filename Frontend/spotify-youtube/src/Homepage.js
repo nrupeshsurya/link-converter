@@ -3,35 +3,10 @@ import './App.css';
 import YoutubeToSpotify from './YoutubeToSpotify'
 import SpotifyToYoutube from './SpotifyToYoutube';  
 import Logout from './Logout'
+import Profile from './Profile';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';  
 
-const axios = require('axios');
 class Homepage extends Component {
-    constructor() {
-        super();
-        this.state=({
-          name: ''
-        })
-    }
-
-    componentDidMount() {
-        this.getData = this.getData.bind(this);
-        this.getData();
-    }
-
-    getData() {
-        var self = this;
-        axios
-        .get('http://localhost:5000/home',{withCredentials: true})
-        .then(function (response) {
-        console.log(response.data.display_name);
-        self.setState({name: response.data.display_name})
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-    }
-
     render() {
         return ( 
             <Router>    
@@ -52,6 +27,7 @@ class Homepage extends Component {
                   </div>    
                 </nav> <br />    
                 <Switch>    
+                  <Route exact path='/homepage' component={Profile} />
                   <Route path='/YoutubeToSpotify' component={YoutubeToSpotify} />    
                   <Route path='/SpotifyToYoutube' component={SpotifyToYoutube} />
                   <Route path='/Logout' component={Logout} />  
