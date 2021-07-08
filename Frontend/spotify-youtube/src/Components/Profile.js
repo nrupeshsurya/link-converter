@@ -49,7 +49,7 @@ class Profile extends Component {
                                 <Card className="p-2" style ={{ maxWidth: "100%"}}>
                                     <CardBody>
                                         <div style= {{
-                                            backgroundColor: 'white',
+                                            backgroundColor: '#eeeeee',
                                             padding: '10px 50px',
                                             border: '1px',
                                             borderRadius: '5px',
