@@ -27,7 +27,7 @@ class Homepage extends Component {
                   </div>    
                 </nav> <br />    
                 <Switch>    
-                  <Route exact path='/homepage' component={Profile} />
+                  <Route exact path='/Homepage' component={Profile} />
                   <Route path='/YoutubeToSpotify' component={YoutubeToSpotify} />    
                   <Route path='/SpotifyToYoutube' component={SpotifyToYoutube} />
                   <Route path='/Logout' component={Logout} />  
