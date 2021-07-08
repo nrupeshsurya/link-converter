@@ -42,33 +42,33 @@ class YoutubeToSpotify extends Component {
 
     render() {
         return (
-          <body className="App-body">
-            <div class="container" style = {{ paddingTop: '100px' }}>
-                <div class="row"> 
-                    <div class="column" style={{float:'left'}}>
+          <div className="App-body">
+            <div className="container" style = {{ paddingTop: '100px' }}>
+                <div className="row"> 
+                    <div className="column" style={{float:'left'}}>
                         <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
-                    <div class="column" style={{float:'left'}}>
+                    <div className="column" style={{float:'left'}}>
                         <Input type="text" onChange={this.youtubeLink} placeholder="Enter Youtube Link" className="enter-text"/>
                     </div>
                 </div>
-                <div class="row"> 
-                    <div class="column" style={{float:'left'}}>
+                <div className="row"> 
+                    <div className="column" style={{float:'left'}}>
                         <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
-                    <div class="column" style={{float:'left'}}>
+                    <div className="column" style={{float:'left'}}>
                         <Input type="text" onChange={this.spotifyLink} placeholder="Spotify Link" className="enter-text"/>
                     </div>
                 </div>
             </div>
             <div>
                 <div style={{ paddingLeft: '70px'}}>
-                    <Button onClick={this.handleConvert} className="ConvertY2S-link" float >
+                    <Button onClick={this.handleConvert} className="ConvertY2S-link" block >
                           Convert
                     </Button>
                 </div>    
             </div>
-          </body>
+          </div>
         );
     }
     
