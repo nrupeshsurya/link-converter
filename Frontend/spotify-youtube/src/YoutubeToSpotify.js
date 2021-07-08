@@ -1,8 +1,11 @@
-import youtubeLogo from './youtubeMusicLogo.svg';
-import logo from './logo.svg';
+import youtubeLogo from './youtubeMusicLogo2.svg';
+import spotifyLogo from './spotifyLogo.svg';
 import './App.css';
 import React, { Component } from "react";
 import { Button, Col, Container, Input, InputGroup, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
+const axios = require('axios');
 
 class YoutubeToSpotify extends Component {
     constructor() {
@@ -12,7 +15,8 @@ class YoutubeToSpotify extends Component {
             spotifyLink:'',
         }
         this.youtubeLink = this.youtubeLink.bind(this);
-        this.spotifyLink = this.spotifyLink.bind(this);   
+        this.spotifyLink = this.spotifyLink.bind(this);  
+        this.handleConvert = this.handleConvert.bind(this); 
     }
 
     youtubeLink(event) {
@@ -23,42 +27,43 @@ class YoutubeToSpotify extends Component {
       this.setState({ spotifyLink: event.target.value })
     }
 
+    handleConvert() {
+      var self = this;
+      var myLink = {
+        link: self.state.youtubeLink
+      }
+      axios
+      .post('http://localhost:5000/convertYoutube', myLink, { withCredentials:true })
+      .then(response => self.setState({ spotifyLink: response.data.link}, () => {console.log(self.state.spotifyLink)}))
+    }
+
     render() {
         return (
           <body className="App-body">
-            <div className="YoutubeToSpotify">
-                <Container>
-                    <Row>
-                      <Col>
-                        
-                      </Col>
-                      <Col>
-                          <InputGroup>
-                            <div class="pull-left">
-                              <img src={youtubeLogo} alt="logo" style={{ height: 79.5, width: 54 }}/>
-                            </div>
-                              <Input type="text" onChange={this.youtubeLink} placeholder="Enter Youtube Link" className="enter-text"/>
-                          </InputGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <InputGroup>
-                          <div class="pull-left">
-                              <img src={logo} alt="logo" style={{ height: 79.5, width: 54 }}/>
-                            </div>
-                          <Input type="text" onChange={this.spotifyLink} placeholder="Spotify Link" className="enter-text"/>
-                        </InputGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Button onClick={this.handleConvert} className="ConvertY2S-link" block >
+            <div class="container" style = {{ paddingTop: '100px' }}>
+                <div class="row"> 
+                    <div class="column" style={{float:'left'}}>
+                        <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
+                    </div>
+                    <div class="column" style={{float:'left'}}>
+                        <Input type="text" onChange={this.youtubeLink} placeholder="Enter Youtube Link" className="enter-text"/>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="column" style={{float:'left'}}>
+                        <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
+                    </div>
+                    <div class="column" style={{float:'left'}}>
+                        <Input type="text" onChange={this.spotifyLink} placeholder="Spotify Link" className="enter-text"/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div style={{ paddingLeft: '70px'}}>
+                    <Button onClick={this.handleConvert} className="ConvertY2S-link" float >
                           Convert
-                        </Button>
-                      </Col>
-                    </Row>
-                </Container>
+                    </Button>
+                </div>    
             </div>
           </body>
         );

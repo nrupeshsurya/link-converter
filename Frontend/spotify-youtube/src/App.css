@@ -69,6 +69,7 @@
 
 .YoutubeToSpotify {
   text-align: left;
+  vertical-align: center;
   background-color: #282c34;
   align-items: center;
   display: flex;
@@ -125,7 +126,7 @@
   background-color: #000000;
   border-color: #000000;
   color: white;
-  text-align:center;
+  text-indent: 20px;
 }
 
 ul {
