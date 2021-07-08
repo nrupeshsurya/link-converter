@@ -83,8 +83,8 @@
 }
 
 .ConvertY2S-link {
-  color: #FF0000;
-  border: 0.2em solid #FF0000;
+  color: #c4302b;
+  border: 0.2em solid #c4302b;
   border-radius: 2em;
   background-color: transparent;
   cursor: pointer;
@@ -96,7 +96,7 @@
 }
 
 .ConvertY2S-link:hover {
-  background: #FF0000;
+  background: #c4302b;
   color: #333;
 }
 

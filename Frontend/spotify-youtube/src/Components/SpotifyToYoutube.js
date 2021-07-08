@@ -39,7 +39,7 @@ class SpotifyToYoutube extends Component {
     render() {
         return (
           <div className="App-body">
-            <div className="container" style = {{ paddingTop: '100px' }}>
+            <div className="container" style = {{ paddingTop: '10%' }}>
                 <div className="row"> 
                     <div className="column" style={{float:'left'}}>
                         <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
@@ -53,7 +53,7 @@ class SpotifyToYoutube extends Component {
                         <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
-                        <Link to={(this.state.disabled)?null:{pathname:(this.state.youtubeLink)}} target='_blank'>
+                        <Link to={{pathname:(this.state.youtubeLink)}} target='_blank' style={{ pointerEvents: (this.state.disabled)?'none':'' }}>
                             <Input 
                             type="text" 
                             placeholder='YouTube Link' 

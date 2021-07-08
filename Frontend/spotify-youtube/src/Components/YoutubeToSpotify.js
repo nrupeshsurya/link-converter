@@ -40,13 +40,13 @@ class YoutubeToSpotify extends Component {
     render() {
         return (
           <div className="App-body">
-            <div className="container" style = {{ paddingTop: '100px' }}>
+            <div className="container" style = {{ paddingTop: '10%' }}>
                 <div className="row"> 
                     <div className="column" style={{float:'left'}}>
                         <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
-                        <Input type="text" onChange={this.youtubeLink} placeholder="Enter Youtube Link" className="enter-text"/>
+                        <Input type="text" onChange={this.youtubeLink} placeholder="Enter YouTube/YouTube Music Link" className="enter-text"/>
                     </div>
                 </div>
                 <div className="row"> 
@@ -54,7 +54,7 @@ class YoutubeToSpotify extends Component {
                         <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
-                    <Link to={(this.state.disabled)?null:{pathname:(this.state.spotifyLink)}} target='_blank'>
+                    <Link to={{pathname:(this.state.spotifyLink)}} target='_blank' style={{ pointerEvents: (this.state.disabled)?'none':'' }}>
                             <Input 
                             type="text" 
                             placeholder='Spotify Link' 
