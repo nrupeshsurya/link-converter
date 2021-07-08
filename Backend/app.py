@@ -12,7 +12,6 @@ load_dotenv()
 # App config
 app = Flask(__name__)
 cors = CORS(app, supports_credentials=True)
-# Session(app)
 
 app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
@@ -25,7 +24,6 @@ def login():
     auth_url = sp_oauth.get_authorize_url()
     print(auth_url)
     return jsonify({'link':auth_url})
-    # return redirect(auth_url)
 
 @app.route('/authorize')
 @cross_origin()
@@ -36,7 +34,6 @@ def authorize():
     token_info = sp_oauth.get_access_token(code)
     session["token_info"] = token_info
     session.modified = True
-    # return "success"
     return redirect("http://localhost:3000/Homepage")
 
 @app.route('/logout', methods=['GET'])
@@ -45,7 +42,6 @@ def logout():
     for key in list(session.keys()):
         session.pop(key)
     return jsonify({'link': 'https://accounts.spotify.com/en/logout'})
-    # return redirect('https://accounts.spotify.com/en/logout')
 
 @app.route('/convertSpotify', methods=['POST', 'GET'])
 @cross_origin(supports_credentials=True)
@@ -53,11 +49,9 @@ def convertSpotify():
     session['token_info'], authorized = get_token()
     session.modified = True
     if not authorized:
-        #TODO: tell frontend to redirect
         return redirect('http://localhost:3000')
     link = request.form['link']
     # link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
-    #link = request.json.get('link')
     linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
     data = {
         'link': linkToReturn
@@ -70,9 +64,7 @@ def convertYoutube():
     session['token_info'], authorized = get_token()
     session.modified = True
     if not authorized:
-        #TODO: tell frontend to redirect
         return redirect('http://localhost:3000')
-    # print(request)
     link = request.form['link']
     print(link)
     #link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
@@ -88,7 +80,6 @@ def home():
     session['token_info'], authorized = get_token()
     session.modified = True
     if not authorized:
-        #TODO: tell frontend to redirect
         return redirect('http://localhost:3000')
     # link = request.form['link']
     data = profileDetails(session.get('token_info').get('access_token'))
