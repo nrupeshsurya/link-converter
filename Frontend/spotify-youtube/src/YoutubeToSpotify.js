@@ -3,6 +3,7 @@ import spotifyLogo from './spotifyLogo.svg';
 import './App.css';
 import React, { Component } from "react";
 import { Button, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const axios = require('axios');
 
@@ -11,19 +12,15 @@ class YoutubeToSpotify extends Component {
         super();
         this.state = {
             youtubeLink:'',
-            spotifyLink:'',
+            spotifyLink:'Spotify Link',
+            disabled:true
         }
-        this.youtubeLink = this.youtubeLink.bind(this);
-        this.spotifyLink = this.spotifyLink.bind(this);  
+        this.youtubeLink = this.youtubeLink.bind(this); 
         this.handleConvert = this.handleConvert.bind(this); 
     }
 
     youtubeLink(event) {
-      this.setState({ youtubeLink: event.target.value}, () => {console.log(this.state.youtubeLink);})
-    }
-
-    spotifyLink(event) {
-      this.setState({ spotifyLink: event.target.value })
+      this.setState({ youtubeLink: event.target.value})
     }
 
     handleConvert() {
@@ -34,7 +31,7 @@ class YoutubeToSpotify extends Component {
       if (self.state.youtubeLink !== '') {
         axios
         .post('http://localhost:5000/convertSpotify', data, { withCredentials:true })
-        .then(function(response) { self.setState({ spotifyLink: response.data.link}, function() {console.log(self.state.spotifyLink);})})
+        .then(function(response) { self.setState({ spotifyLink: response.data.link, disabled: false})})
         .catch(function(error)  {console.log(error);})
       }
       
@@ -57,7 +54,15 @@ class YoutubeToSpotify extends Component {
                         <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
-                        <Input type="text" onChange={this.spotifyLink} placeholder="Spotify Link" className="enter-text"/>
+                    <Link to={(this.state.disabled)?null:{pathname:(this.state.spotifyLink)}} target='_blank'>
+                            <Input 
+                            type="text" 
+                            placeholder='Spotify Link' 
+                            className="enter-text" 
+                            disabled={(this.state.disabled)?"disabled":""} 
+                            value={(this.state.disabled)?null:(this.state.spotifyLink)}
+                            />
+                        </Link>
                     </div>
                 </div>
             </div>

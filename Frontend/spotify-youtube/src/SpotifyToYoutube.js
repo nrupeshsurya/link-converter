@@ -3,26 +3,23 @@ import spotifyLogo from './spotifyLogo.svg';
 import './App.css';
 import React, { Component } from "react";
 import { Button, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const axios = require('axios');
 class SpotifyToYoutube extends Component {
     constructor() {
         super();
         this.state = {
-            youtubeLink:'',
+            youtubeLink:'YouTube Link',
             spotifyLink:'',
+            disabled:true
         }
-        this.youtubeLink = this.youtubeLink.bind(this);
         this.spotifyLink = this.spotifyLink.bind(this);
         this.handleConvert = this.handleConvert.bind(this);   
     }
 
-    youtubeLink(event) {
-      this.setState({ youtubeLink: event.target.value })
-    }
-
     spotifyLink(event) {
-        this.setState({ spotifyLink: event.target.value}, () => {console.log(this.state.spotifyLink);})
+        this.setState({ spotifyLink: event.target.value })
     }
 
     handleConvert() {
@@ -30,10 +27,10 @@ class SpotifyToYoutube extends Component {
         var data = new FormData();
         data.append('link', self.state.spotifyLink);
         console.log(data);
-        if (self.state.spotifyLink !== '') {
+        if (self.state.spotifyLink !== 'YouTube Link') {
           axios
           .post('http://localhost:5000/convertYoutube', data, { withCredentials:true })
-          .then(function(response) { self.setState({ youtubeLink: response.data.link}, function() {console.log(self.state.youtubeLink);})})
+          .then(function(response) { self.setState({ youtubeLink: response.data.link, disabled: false})})
           .catch(function(error)  {console.log(error);})
         }
         
@@ -56,7 +53,15 @@ class SpotifyToYoutube extends Component {
                         <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
-                        <Input type="text" onChange={this.youtubeLink} placeholder="Youtube Link" className="enter-text"/>
+                        <Link to={(this.state.disabled)?null:{pathname:(this.state.youtubeLink)}} target='_blank'>
+                            <Input 
+                            type="text" 
+                            placeholder='YouTube Link' 
+                            className="enter-text" 
+                            disabled={(this.state.disabled)?"disabled":""} 
+                            value={(this.state.disabled)?null:(this.state.youtubeLink)}
+                            />
+                        </Link>
                     </div>
                 </div>
             </div>
