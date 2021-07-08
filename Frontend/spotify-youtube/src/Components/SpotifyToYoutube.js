@@ -1,6 +1,6 @@
-import youtubeLogo from './youtubeMusicLogo2.svg';
-import spotifyLogo from './spotifyLogo.svg';
-import './App.css';
+import youtubeLogo from '../Logo/youtubeMusicLogo2.svg';
+import spotifyLogo from '../Logo/spotifyLogo.svg';
+import '../App.css';
 import React, { Component } from "react";
 import { Button, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';

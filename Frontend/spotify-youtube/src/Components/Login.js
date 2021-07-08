@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from '../Logo/logo.svg';
+import '../App.css';
 import React, { Component } from "react";
 import { Button } from 'reactstrap';
 
