@@ -141,6 +141,10 @@ li {
   float: left;
 }
 
+li.go-right {
+  float: right;
+}
+
 li a {
   display: block;
   color: white;
