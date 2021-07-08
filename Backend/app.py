@@ -39,7 +39,7 @@ def authorize():
     # return "success"
     return redirect("http://localhost:3000/Homepage")
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 @cross_origin(supports_credentials=True)
 def logout():
     for key in list(session.keys()):
@@ -54,7 +54,7 @@ def convertSpotify():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('http://localhost:3000/login')
+        return redirect('http://localhost:3000')
     link = request.form['link']
     # link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
     #link = request.json.get('link')
@@ -71,7 +71,7 @@ def convertYoutube():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('http://localhost:3000/login')
+        return redirect('http://localhost:3000')
     # print(request)
     link = request.form['link']
     print(link)
@@ -89,7 +89,7 @@ def home():
     session.modified = True
     if not authorized:
         #TODO: tell frontend to redirect
-        return redirect('http://localhost:3000/login')
+        return redirect('http://localhost:3000')
     # link = request.form['link']
     data = profileDetails(session.get('token_info').get('access_token'))
     return jsonify(data)
