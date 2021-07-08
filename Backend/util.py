@@ -41,7 +41,10 @@ def YTtoSpotify(link, access_token):
     song_id = song_id[::-1]
 
     sp = Spotify(auth=access_token)
-    data = sp.track(song_id)
+    try:
+        data = sp.track(song_id)
+    except:
+        return "error"
 
     songName = data['name']
     artistName = data['artists'][0]['name']
@@ -61,4 +64,3 @@ def profileDetails(access_token):
     sp = Spotify(auth=access_token)
     data = sp.me()
     return data
-    pass

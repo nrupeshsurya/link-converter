@@ -32,8 +32,8 @@ class SpotifyToYoutube extends Component {
         console.log(data);
         if (self.state.spotifyLink !== '') {
           axios
-          .post('http://localhost:5000/convertSpotify', data, { withCredentials:true })
-          .then(function(response) { self.setState({ spotifyLink: response.data.link}, function() {console.log(self.state.youtubeLink);})})
+          .post('http://localhost:5000/convertYoutube', data, { withCredentials:true })
+          .then(function(response) { self.setState({ youtubeLink: response.data.link}, function() {console.log(self.state.youtubeLink);})})
           .catch(function(error)  {console.log(error);})
         }
         
