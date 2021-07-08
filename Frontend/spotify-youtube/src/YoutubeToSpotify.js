@@ -2,8 +2,7 @@ import youtubeLogo from './youtubeMusicLogo2.svg';
 import spotifyLogo from './spotifyLogo.svg';
 import './App.css';
 import React, { Component } from "react";
-import { Button, Col, Container, Input, InputGroup, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Button, Input } from 'reactstrap';
 
 const axios = require('axios');
 
@@ -29,13 +28,14 @@ class YoutubeToSpotify extends Component {
 
     handleConvert() {
       var self = this;
-      var myLink = {
-        link: self.state.youtubeLink
-      }
-      if (self.state.youtubeLink != '') {
+      var data = new FormData();
+      data.append('link', self.state.youtubeLink);
+      console.log(data);
+      if (self.state.youtubeLink !== '') {
         axios
-        .post('http://localhost:5000/convertSpotify', myLink, { withCredentials:true })
-        .then(response => self.setState({ spotifyLink: response.data.link}, () => {console.log(self.state.spotifyLink);}))
+        .post('http://localhost:5000/convertYoutube', data, { withCredentials:true })
+        .then(function(response) { self.setState({ spotifyLink: response.data.link}, function() {console.log(self.state.spotifyLink);})})
+        .catch(function(error)  {console.log(error);})
       }
       
     }

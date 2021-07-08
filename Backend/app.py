@@ -45,7 +45,7 @@ def logout():
         session.pop(key)
     return redirect('https://accounts.spotify.com/en/logout')
 
-@app.route('/convertSpotify', methods=['POST'])
+@app.route('/convertSpotify', methods=['POST', 'GET'])
 @cross_origin(supports_credentials=True)
 def convertSpotify():
     session['token_info'], authorized = get_token()
@@ -53,9 +53,10 @@ def convertSpotify():
     if not authorized:
         #TODO: tell frontend to redirect
         return redirect('http://localhost:3000/login')
-    # link = request.form['link']
+    link = request.form['link']
+    print(link)
     # link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
-    link = request.get_json()['link']
+    #link = request.json.get('link')
     linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
     data = {
         'link': linkToReturn
@@ -71,7 +72,7 @@ def convertYoutube():
         #TODO: tell frontend to redirect
         return redirect('http://localhost:3000/login')
     # print(request)
-    link = request.get_json()['link']
+    link = request.form['link']
     print(link)
     #link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
     linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
