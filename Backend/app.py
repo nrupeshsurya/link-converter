@@ -40,10 +40,12 @@ def authorize():
     return redirect("http://localhost:3000/Homepage")
 
 @app.route('/logout')
+@cross_origin(supports_credentials=True)
 def logout():
     for key in list(session.keys()):
         session.pop(key)
-    return redirect('https://accounts.spotify.com/en/logout')
+    return jsonify({'link': 'https://accounts.spotify.com/en/logout'})
+    # return redirect('https://accounts.spotify.com/en/logout')
 
 @app.route('/convertSpotify', methods=['POST', 'GET'])
 @cross_origin(supports_credentials=True)
