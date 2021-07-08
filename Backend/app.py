@@ -61,7 +61,7 @@ def convertSpotify():
     }
     return jsonify(data)
 
-@app.route('/convertYoutube', methods=['POST'])
+@app.route('/convertYoutube',methods=['POST'])
 @cross_origin(supports_credentials=True)
 def convertYoutube():
     session['token_info'], authorized = get_token()
