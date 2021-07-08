@@ -45,7 +45,7 @@
   padding: 0.7em 1.5em;
   text-transform: uppercase;
   transition: all 0.25s ease;
-  animation: fadein 3s;
+  animation: fadein 2s;
 }
 
 @keyframes fadein {
