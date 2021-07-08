@@ -20,7 +20,7 @@ class YoutubeToSpotify extends Component {
     }
 
     youtubeLink(event) {
-      this.setState({ youtubeLink: event.target.value })
+      this.setState({ youtubeLink: event.target.value}, () => {console.log(this.state.youtubeLink);})
     }
 
     spotifyLink(event) {
@@ -32,9 +32,12 @@ class YoutubeToSpotify extends Component {
       var myLink = {
         link: self.state.youtubeLink
       }
-      axios
-      .post('http://localhost:5000/convertYoutube', myLink, { withCredentials:true })
-      .then(response => self.setState({ spotifyLink: response.data.link}, () => {console.log(self.state.spotifyLink)}))
+      if (self.state.youtubeLink != '') {
+        axios
+        .post('http://localhost:5000/convertSpotify', myLink, { withCredentials:true })
+        .then(response => self.setState({ spotifyLink: response.data.link}, () => {console.log(self.state.spotifyLink);}))
+      }
+      
     }
 
     render() {
