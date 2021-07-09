@@ -7,7 +7,9 @@ import Profile from './Profile';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';  
 
 class Homepage extends Component {
+
     render() {
+      const { path, url } = this.props.match;
         return ( 
             <Router>    
               <div className="container">    
@@ -15,10 +17,10 @@ class Homepage extends Component {
                   <div className="collapse navbar-collapse" >    
                     <ul className="navbar-nav">    
                       <li className="nav-item">    
-                        <NavLink to={'/YoutubeToSpotify'} activeClassName="active">YouTube to Spotify</NavLink>    
+                        <NavLink to={`${url}/YoutubeToSpotify`} activeClassName="active">YouTube to Spotify</NavLink>    
                       </li>    
                       <li className="nav-item">    
-                        <NavLink to={'/SpotifyToYouTube'} activeClassName="active">Spotify To YouTube</NavLink>    
+                        <NavLink to={`${url}/SpotifyToYoutube`} activeClassName="active">Spotify To YouTube</NavLink>    
                       </li>
                       <li className="nav-item go-right">    
                         <NavLink to={'/Logout'} activeClassName="active">Log Out</NavLink>    
@@ -28,8 +30,8 @@ class Homepage extends Component {
                 </nav> <br />    
                 <Switch>    
                   <Route exact path='/Homepage' component={Profile} />
-                  <Route path='/YoutubeToSpotify' component={YoutubeToSpotify} />    
-                  <Route path='/SpotifyToYoutube' component={SpotifyToYoutube} />
+                  <Route exact path={`${path}/YoutubeToSpotify`} component={YoutubeToSpotify} />    
+                  <Route exact path={`${path}/SpotifyToYoutube`} component={SpotifyToYoutube} />
                   <Route path='/Logout' component={Logout} />  
                 </Switch>  
               </div>    
