@@ -74,7 +74,7 @@ class Profile extends Component {
                                             </div>
                                             <div>
                                                 <CardTitle style={{ fontSize: '175%'}}>
-                                                    Welcome to Convert Song Links, {this.state.name}.
+                                                    Welcome to Convertipy, {this.state.name}.
                                                 </CardTitle>
                                                 <p>
                                                     You can use this website to convert <span style={{color:'#1DB954'}}>Spotify</span> links to 
