@@ -80,7 +80,7 @@ def authorize():
     # session["token_info"] = token_info
     # session.modified = True
     # session.new = True
-    return redirect("http://localhost:3000/Homepage")
+    return redirect("http://localhost:3000/Dashboard")
 
 @app.route('/logout', methods=['GET'])
 @cross_origin(supports_credentials=True)

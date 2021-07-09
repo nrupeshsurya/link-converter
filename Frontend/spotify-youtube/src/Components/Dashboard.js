@@ -6,7 +6,7 @@ import Logout from './Logout'
 import Profile from './Profile';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';  
 
-class Homepage extends Component {
+class Dashboard extends Component {
 
     render() {
       const { path, url } = this.props.match;
@@ -29,7 +29,7 @@ class Homepage extends Component {
                   </div>    
                 </nav> <br />    
                 <Switch>    
-                  <Route exact path='/Homepage' component={Profile} />
+                  <Route exact path='/Dashboard' component={Profile} />
                   <Route exact path={`${path}/YoutubeToSpotify`} component={YoutubeToSpotify} />    
                   <Route exact path={`${path}/SpotifyToYoutube`} component={SpotifyToYoutube} />
                   <Route path='/Logout' component={Logout} />  
@@ -40,4 +40,4 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+export default Dashboard;
