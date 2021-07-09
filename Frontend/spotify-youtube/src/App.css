@@ -93,6 +93,7 @@
   text-transform: uppercase;
   transition: all 0.25s ease;
   align-self: center;
+  margin-bottom: 7vh;
 }
 
 .ConvertY2S-link:hover {
@@ -110,6 +111,7 @@
   padding: 0.7em 1.5em;
   text-transform: uppercase;
   transition: all 0.25s ease;
+  margin-bottom: 7vh;
 }
 
 .ConvertS2Y-link:hover {
@@ -118,15 +120,17 @@
 }
 
 .enter-text {
-  width: 700px;
-  height: 50px;
+  width: 80vmin;
+  height: 7vh;
   border-width: 0px;
-  margin-bottom:100px;
-  border-radius: 25px;
+  margin-bottom: 15vh;
+  border-radius: 7vh;
   background-color: #000000;
   border-color: #000000;
   color: white;
-  text-indent: 20px;
+  text-indent: 5%;
+  outline: none;
+  font-size: 80%;
 }
 
 ul {
@@ -162,9 +166,5 @@ li a:hover {
   background-color: #1DB954;
 }
 
-.enter-text {
-  outline: none;
-  font-size: 20px;
-}
 
 

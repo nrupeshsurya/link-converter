@@ -43,10 +43,10 @@ class YoutubeToSpotify extends Component {
     render() {
         return (
           <div className="App-body">
-            <div className="container" style = {{ paddingTop: '10%' }}>
+            <div className="container" style = {{ paddingTop: '15vh' }}>
                 <div className="row"> 
                     <div className="column" style={{float:'left'}}>
-                        <img src={youtubeLogo} alt="logo" style={{ height: '50px' }} />
+                        <img src={youtubeLogo} alt="logo" style={{ height: '7vh' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
                         <Input type="text" onChange={this.youtubeLink} placeholder="Enter YouTube/YouTube Music Link" className="enter-text"/>
@@ -54,7 +54,7 @@ class YoutubeToSpotify extends Component {
                 </div>
                 <div className="row"> 
                     <div className="column" style={{float:'left'}}>
-                        <img src={spotifyLogo} alt="logo" style={{ height: '50px' }} />
+                        <img src={spotifyLogo} alt="logo" style={{ height: '7vh' }} />
                     </div>
                     <div className="column" style={{float:'left'}}>
                     <Link to={{pathname:(this.state.spotifyLink)}} target='_blank' style={{ pointerEvents: (this.state.disabled)?'none':'' }}>
@@ -70,7 +70,7 @@ class YoutubeToSpotify extends Component {
                 </div>
             </div>
             <div>
-                <div style={{ paddingLeft: '70px'}}>
+                <div style={{ paddingLeft: '2vw'}}>
                     <Button onClick={this.handleConvert} className="ConvertY2S-link" block >
                           Convert
                     </Button>
