@@ -1,3 +1,4 @@
+import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from flask import Flask, url_for, session, request, redirect, jsonify
 from flask_cors import cross_origin, CORS
@@ -16,6 +17,45 @@ cors = CORS(app, supports_credentials=True)
 app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
 
+class FlaskSessionCacheHandler(spotipy.cache_handler.CacheHandler):
+    """
+    A cache handler that stores the token info in the session framework
+    provided by Django.
+    Read more at https://docs.djangoproject.com/en/3.2/topics/http/sessions/
+    """
+
+    def __init__(self, session):
+        """
+        Parameters:
+            * request: HttpRequest object provided by Django for every
+            incoming request
+        """
+        self.session = session
+
+    def get_cached_token(self):
+        token_info = None
+        try:
+            token_info = self.session.get("token_info", {})
+        except KeyError:
+            print("Token not found in the session")
+
+        return token_info
+
+    def save_token_to_cache(self, token_info):
+        try:
+            self.session['token_info'] = token_info
+        except Exception as e:
+            print("Error saving token to cache: " + str(e))
+
+    def modify_token(self):
+        self.session.modified = True
+
+    def logout_session(self):
+        for key in list(self.session.keys()):
+            self.session.pop(key)
+        pass
+        
+flaskSessionCacheHandler = FlaskSessionCacheHandler(session)
 
 @app.route('/login',methods=['GET'])
 @cross_origin()
@@ -32,8 +72,10 @@ def authorize():
     session.clear()
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
-    session["token_info"] = token_info
-    session.modified = True
+    flaskSessionCacheHandler.save_token_to_cache(token_info)
+    # session["token_info"] = token_info
+    # session.modified = True
+    # session.new = True
     return redirect("http://localhost:3000/Homepage")
 
 @app.route('/logout', methods=['GET'])
@@ -46,8 +88,9 @@ def logout():
 @app.route('/convertSpotify', methods=['POST', 'GET'])
 @cross_origin(supports_credentials=True)
 def convertSpotify():
-    session['token_info'], authorized = get_token()
-    session.modified = True
+    token_info, authorized = get_token()
+    flaskSessionCacheHandler.save_token_to_cache(token_info)
+    flaskSessionCacheHandler.modify_token()
     if not authorized:
         return redirect('http://localhost:3000')
     link = request.form['link']
@@ -61,8 +104,9 @@ def convertSpotify():
 @app.route('/convertYoutube', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def convertYoutube():
-    session['token_info'], authorized = get_token()
-    session.modified = True
+    token_info, authorized = get_token()
+    flaskSessionCacheHandler.save_token_to_cache(token_info)
+    flaskSessionCacheHandler.modify_token()
     if not authorized:
         return redirect('http://localhost:3000')
     link = request.form['link']
@@ -77,8 +121,9 @@ def convertYoutube():
 @app.route('/home')
 @cross_origin(supports_credentials=True)
 def home():
-    session['token_info'], authorized = get_token()
-    session.modified = True
+    token_info, authorized = get_token()
+    flaskSessionCacheHandler.save_token_to_cache(token_info)
+    flaskSessionCacheHandler.modify_token()
     if not authorized:
         return redirect('http://localhost:3000')
     # link = request.form['link']
@@ -89,20 +134,21 @@ def home():
 # @cross_origin(supports_credentials=True)
 def get_token():
     token_valid = False
-    token_info = session.get("token_info", {})
+    # token_info = session.get("token_info", {})
+    token_info = flaskSessionCacheHandler.get_cached_token()
     # Checking if the session already has a token stored
-    if not (session.get('token_info', False)):
+    if token_info=={}:
         token_valid = False
         return token_info, token_valid
 
     # Checking if token has expired
     now = int(time.time())
-    is_token_expired = session.get('token_info').get('expires_at') - now < 60
+    is_token_expired = token_info.get('expires_at') - now < 60
 
     # Refreshing token if it has expired
     if (is_token_expired):
         sp_oauth = create_spotify_oauth()
-        token_info = sp_oauth.refresh_access_token(session.get('token_info').get('refresh_token'))
+        token_info = sp_oauth.refresh_access_token(token_info.get('refresh_token'))
 
     token_valid = True
     return token_info, token_valid
@@ -112,4 +158,5 @@ def create_spotify_oauth():
             client_id=os.getenv('client_id'),
             client_secret=os.getenv('client_secret'),
             redirect_uri=url_for('authorize', _external=True),
-            scope=["user-read-private", "user-read-email"])
+            scope=["user-read-private", "user-read-email"],
+            cache_handler=flaskSessionCacheHandler)
