@@ -18,12 +18,12 @@ class Logout extends Component {
     handleLogout() {
         var self = this;
         axios
-        .get('http://localhost:5000/logout', { withCredentials:true})
+        .get(`${process.env.REACT_APP_BACKEND_URL}/logout`, { withCredentials:true})
         .then(function (response) {
         console.log(response.data.link);
         self.setState({link: response.data.link})
         window.open(self.state.link)
-        window.open('http://localhost:3000', "_self")
+        window.open(`${process.env.REACT_APP_FRONTEND_URL}`, "_self")
         })
         .catch(function (error) {
         console.log(error);

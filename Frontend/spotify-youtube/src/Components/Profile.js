@@ -21,10 +21,10 @@ class Profile extends Component {
     checkAuth() {
         var self = this;
         axios
-        .get('http://localhost:5000/checkLogin', {withCredentials: true})
+        .get(`${process.env.REACT_APP_BACKEND_URL}/checkLogin`, {withCredentials: true})
         .then(function(response) {
             console.log(response.data.authorize);
-            (response.data.authorize === true)?self.getData():window.open('http://localhost:3000', "_self")
+            (response.data.authorize === true)?self.getData():window.open(`${process.env.REACT_APP_FRONTEND_URL}`, "_self")
         })
         .catch(function(error) {
             console.log(error);
@@ -34,10 +34,11 @@ class Profile extends Component {
     getData() {
         var self = this;
         axios
-        .get('http://localhost:5000/home',{withCredentials: true})
+        .get(`${process.env.REACT_APP_BACKEND_URL}/home`,{withCredentials: true})
         .then(function (response) {
             (response.data.images[0] === undefined)?self.setState({name: response.data.display_name}):
             self.setState({name: response.data.display_name, image: response.data.images[0]['url']}, () => {console.log(self.state);})
+            console.log(process.env)
         })
         .catch(function (error) {
         console.log(error);

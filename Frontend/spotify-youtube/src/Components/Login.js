@@ -17,7 +17,7 @@ class Login extends Component {
   handleLogin() {
     var self = this;
     axios
-    .get('http://localhost:5000/login')
+    .get(`${process.env.REACT_APP_BACKEND_URL}/login`)
     .then(function (response) {
       console.log(response.data.link);
       self.setState({link: response.data.link})

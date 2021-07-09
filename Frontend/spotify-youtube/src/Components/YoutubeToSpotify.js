@@ -26,11 +26,11 @@ class YoutubeToSpotify extends Component {
 
     checkAuth() {
         axios
-        .get('http://localhost:5000/checkLogin', {withCredentials: true})
+        .get(`${process.env.REACT_APP_BACKEND_URL}/checkLogin`, {withCredentials: true})
         .then(function(response) {
             console.log(response.data.authorize);
             if (response.data.authorize === false){
-                window.open('http://localhost:3000', "_self")
+                window.open(`${process.env.REACT_APP_FRONTEND_URL}`, "_self")
             }
         })
         .catch(function(error) {
@@ -49,7 +49,7 @@ class YoutubeToSpotify extends Component {
       console.log(data);
       if (self.state.youtubeLink !== '') {
         axios
-        .post('http://localhost:5000/convertSpotify', data, { withCredentials:true })
+        .post(`${process.env.REACT_APP_BACKEND_URL}/convertSpotify`, data, { withCredentials:true })
         .then(function(response) { 
             (response.data.link === 'error')?alert('Song could not be converted. Sorry for the inconvenience!'):
             self.setState({ spotifyLink: response.data.link, disabled: false})
