@@ -1,6 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from flask import Flask, url_for, session, request, redirect, jsonify
+from flask import Flask, url_for, session, request, redirect, jsonify, send_from_directory
 from flask_cors import cross_origin, CORS
 import time
 from .util import spotifyToYT, YTtoSpotify, profileDetails
@@ -11,7 +11,7 @@ load_dotenv()
 
 
 # App config
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='../Frontend/spotify-youtube/build')
 cors = CORS(app, supports_credentials=True)
 
 app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
@@ -185,3 +185,12 @@ def create_spotify_oauth():
             redirect_uri=url_for('authorize', _external=True),
             scope=["user-read-private", "user-read-email"],
             cache_handler=flaskSessionCacheHandler)
+
+@app.route("/", defaults={'path':''})
+@app.route('/<path:path>')
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
+
+@app.errorhandler(404)   
+def not_found(e):   
+  return send_from_directory(app.static_folder,'index.html')

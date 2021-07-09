@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce4acd26.chunk.css",
+    "main.js": "/static/js/main.6571ad5c.chunk.js",
+    "main.js.map": "/static/js/main.6571ad5c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ebfad5d5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ebfad5d5.js.map",
+    "static/js/2.4fd06df1.chunk.js": "/static/js/2.4fd06df1.chunk.js",
+    "static/js/2.4fd06df1.chunk.js.map": "/static/js/2.4fd06df1.chunk.js.map",
+    "static/js/3.93abd536.chunk.js": "/static/js/3.93abd536.chunk.js",
+    "static/js/3.93abd536.chunk.js.map": "/static/js/3.93abd536.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.ce4acd26.chunk.css.map": "/static/css/main.ce4acd26.chunk.css.map",
+    "static/js/2.4fd06df1.chunk.js.LICENSE.txt": "/static/js/2.4fd06df1.chunk.js.LICENSE.txt",
+    "static/media/logo.93e5215d.svg": "/static/media/logo.93e5215d.svg",
+    "static/media/spotifyLogo.93e5215d.svg": "/static/media/spotifyLogo.93e5215d.svg",
+    "static/media/youtubeMusicLogo2.d5147516.svg": "/static/media/youtubeMusicLogo2.d5147516.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ebfad5d5.js",
+    "static/js/2.4fd06df1.chunk.js",
+    "static/css/main.ce4acd26.chunk.css",
+    "static/js/main.6571ad5c.chunk.js"
+  ]
+}
