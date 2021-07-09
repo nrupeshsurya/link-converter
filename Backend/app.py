@@ -142,6 +142,19 @@ def home():
     data['authorize'] = True
     return jsonify(data)
 
+@app.route('/checkLogin')
+@cross_origin(supports_credentials=True)
+def checkLogin():
+    token_info, authorized = get_token()
+    if not authorized:
+        print("here")
+        return jsonify({'authorize':False})
+    # flaskSessionCacheHandler.save_token_to_cache(token_info)
+    # print(token_info)
+    # print(authorized)
+    # flaskSessionCacheHandler.modify_token()
+    return jsonify({'authorize':True})
+
 # Checks to see if token is valid and gets a new token if not
 # @cross_origin(supports_credentials=True)
 def get_token():
