@@ -50,15 +50,15 @@ class Profile extends Component {
                                     <CardBody>
                                         <div style= {{
                                             backgroundColor: '#eeeeee',
-                                            padding: '10px 50px',
-                                            border: '1px',
-                                            borderRadius: '5px',
+                                            padding: '10% 10%',
+                                            border: '1%',
+                                            borderRadius: '2%',
                                         }}>
                                             <div>
-                                               <CardImg src={this.state.image} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }}/> 
+                                               <CardImg src={this.state.image} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '70%' }}/> 
                                             </div>
                                             <div>
-                                                <CardTitle style={{ fontSize: '30px'}}>
+                                                <CardTitle style={{ fontSize: '175%'}}>
                                                     Welcome to Convert Song Links, {this.state.name}.
                                                 </CardTitle>
                                                 <p>
