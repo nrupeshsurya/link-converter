@@ -42,7 +42,7 @@ class Profile extends Component {
                 top: '50%',
                 transform: 'translate(-50%, -50%)'
             }}>
-                <Container style={{maxWidth: '50%'}}>
+                <Container style={{maxWidth: '50vmin', maxHeight: '80vmin', width: '100%', height: '40%'}}>
                     <Row className="justify-content-center">
                         <Col md="9" lg="7" xl="6">
                             <CardGroup>
