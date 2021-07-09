@@ -142,7 +142,7 @@ def home():
     data['authorize'] = True
     return jsonify(data)
 
-@app.route('/checkLogin')
+@app.route('/checkLogin', methods = ['GET'])
 @cross_origin(supports_credentials=True)
 def checkLogin():
     token_info, authorized = get_token()

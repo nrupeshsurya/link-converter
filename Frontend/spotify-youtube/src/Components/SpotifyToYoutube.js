@@ -18,6 +18,25 @@ class SpotifyToYoutube extends Component {
         this.handleConvert = this.handleConvert.bind(this);   
     }
 
+    componentDidMount() {
+        this.checkAuth = this.checkAuth.bind(this);
+        this.checkAuth();
+    }
+
+    checkAuth() {
+        axios
+        .get('http://localhost:5000/checkLogin', {withCredentials: true})
+        .then(function(response) {
+            console.log(response.data.authorize);
+            if (response.data.authorize === false){
+                window.open('http://localhost:3000', "_self")
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    }
+
     spotifyLink(event) {
         this.setState({ spotifyLink: event.target.value })
     }

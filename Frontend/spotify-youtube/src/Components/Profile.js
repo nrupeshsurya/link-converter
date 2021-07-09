@@ -13,8 +13,22 @@ class Profile extends Component {
     }
 
     componentDidMount() {
+        this.checkAuth = this.checkAuth.bind(this);
         this.getData = this.getData.bind(this);
-        this.getData();
+        this.checkAuth();
+    }
+
+    checkAuth() {
+        var self = this;
+        axios
+        .get('http://localhost:5000/checkLogin', {withCredentials: true})
+        .then(function(response) {
+            console.log(response.data.authorize);
+            (response.data.authorize === true)?self.getData():window.open('http://localhost:3000', "_self")
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
     }
 
     getData() {
