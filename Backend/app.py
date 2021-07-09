@@ -54,6 +54,9 @@ class FlaskSessionCacheHandler(spotipy.cache_handler.CacheHandler):
         for key in list(self.session.keys()):
             self.session.pop(key)
         pass
+
+    def clear_session(self):
+        self.session.clear()
         
 flaskSessionCacheHandler = FlaskSessionCacheHandler(session)
 
@@ -69,7 +72,8 @@ def login():
 @cross_origin()
 def authorize():
     sp_oauth = create_spotify_oauth()
-    session.clear()
+    # session.clear()
+    flaskSessionCacheHandler.clear_session()
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     flaskSessionCacheHandler.save_token_to_cache(token_info)
@@ -89,15 +93,16 @@ def logout():
 @cross_origin(supports_credentials=True)
 def convertSpotify():
     token_info, authorized = get_token()
+    if not authorized:
+        return jsonify({'authorize' : False})
     flaskSessionCacheHandler.save_token_to_cache(token_info)
     flaskSessionCacheHandler.modify_token()
-    if not authorized:
-        return redirect('http://localhost:3000')
     link = request.form['link']
     # link = 'https://music.youtube.com/watch?v=vU05Eksc_iM&feature=share'
     linkToReturn = YTtoSpotify(link,session.get('token_info').get('access_token'))
     data = {
-        'link': linkToReturn
+        'link': linkToReturn,
+        'authorize' : True
     }
     return jsonify(data)
 
@@ -105,16 +110,18 @@ def convertSpotify():
 @cross_origin(supports_credentials=True)
 def convertYoutube():
     token_info, authorized = get_token()
+    if not authorized:
+        return jsonify({'authorize' : False})
     flaskSessionCacheHandler.save_token_to_cache(token_info)
     flaskSessionCacheHandler.modify_token()
-    if not authorized:
-        return redirect('http://localhost:3000')
+    
     link = request.form['link']
     print(link)
     #link = 'https://open.spotify.com/track/7jzyD37KmUByt9qUKL8cWH?si=ec0fcadb838248c5'
     linkToReturn = spotifyToYT(link,session.get('token_info').get('access_token'))
     data = {
-        'link': linkToReturn
+        'link': linkToReturn,
+        'authorize': True
     }
     return jsonify(data)
 
@@ -122,12 +129,17 @@ def convertYoutube():
 @cross_origin(supports_credentials=True)
 def home():
     token_info, authorized = get_token()
-    flaskSessionCacheHandler.save_token_to_cache(token_info)
-    flaskSessionCacheHandler.modify_token()
     if not authorized:
-        return redirect('http://localhost:3000')
+        print("here")
+        return jsonify({'authorize':False})
+    flaskSessionCacheHandler.save_token_to_cache(token_info)
+    print(token_info)
+    print(authorized)
+    flaskSessionCacheHandler.modify_token()
+    
     # link = request.form['link']
     data = profileDetails(session.get('token_info').get('access_token'))
+    data['authorize'] = True
     return jsonify(data)
 
 # Checks to see if token is valid and gets a new token if not
